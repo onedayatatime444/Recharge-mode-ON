@@ -445,7 +445,7 @@ button.ghost:hover{background:var(--lemon); color:var(--ink); border-color:var(-
 /* svg animation primitives */
 .vd-stage .a-f{opacity:0;animation:vdf .8s ease forwards;animation-delay:var(--d,0s)}
 .vd-stage .a-u{opacity:0;animation:vdu .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
-.vd-stage .a-d{stroke-dasharray:1;stroke-dashoffset:1;animation:vdd var(--t,1s) ease-in-out forwards;animation-delay:var(--d,0s)}
+.vd-stage .a-d{opacity:0;stroke-dasharray:1 2;stroke-dashoffset:1;animation:vdd var(--t,1s) ease-in-out forwards;animation-delay:var(--d,0s)}
 .vd-stage .a-g{opacity:0;transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);animation:vdg .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
 .vd-stage .a-gx{opacity:0;transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0);animation:vdgx var(--t,1s) cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
 .vd-stage .a-ring{stroke-dasharray:0 1;animation:vdr var(--t,1.4s) ease-out forwards;animation-delay:var(--d,0s)}
@@ -460,7 +460,7 @@ button.ghost:hover{background:var(--lemon); color:var(--ink); border-color:var(-
 @keyframes vdopen{to{transform:scaleX(.18)}}
 @keyframes vdf{to{opacity:1}}
 @keyframes vdu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes vdd{to{stroke-dashoffset:0}}
+@keyframes vdd{from{opacity:1;stroke-dashoffset:1}to{opacity:1;stroke-dashoffset:0}}
 @keyframes vdg{to{opacity:1;transform:scaleY(1)}}
 @keyframes vdgx{to{opacity:1;transform:scaleX(1)}}
 @keyframes vdr{to{stroke-dasharray:var(--f,.5) 1}}
@@ -508,6 +508,20 @@ button.ghost:hover{background:var(--lemon); color:var(--ink); border-color:var(-
   .vd-stage{height:0;padding-bottom:56.25%}
   .vd-stage .sc{position:absolute;top:0;left:0;right:0;bottom:0;width:auto!important;height:auto!important}
 }
+
+/* polish: moving background, scene fades */
+.vd-stage .sc{position:relative;z-index:1}
+.vd-stage .sc svg{animation:vdsc .5s ease both}
+.vd-bgb{position:absolute;border-radius:50%;filter:blur(36px);opacity:.5;pointer-events:none;z-index:0}
+.vd-bgb.b1{width:46%;aspect-ratio:1;background:#E07970;left:-10%;top:-30%;opacity:.28;animation:vddrift 16s ease-in-out infinite alternate}
+.vd-bgb.b2{width:40%;aspect-ratio:1;background:#CDD7D8;right:-8%;bottom:-35%;opacity:.7;animation:vddrift2 20s ease-in-out infinite alternate}
+[data-theme="dark"] .vd-bgb.b1{opacity:.22}
+[data-theme="dark"] .vd-bgb.b2{background:#DE8948;opacity:.14}
+@keyframes vdsc{from{opacity:0}to{opacity:1}}
+@keyframes vddrift{from{transform:translate(0,0)}to{transform:translate(28%,22%)}}
+@keyframes vddrift2{from{transform:translate(0,0)}to{transform:translate(-30%,-18%)}}
+.vd.paused .vd-bgb{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.vd-bgb{animation:none}.vd-stage .sc svg{animation:none}}
 
 /* ---- single-file page switching ---- */
 .spage{display:none}
@@ -1492,7 +1506,7 @@ var C={s:"#E07970",m:"#DE8948",l:"#DE8948",g:"#BBAB47",b:"#7A5A52",w:"#5A2D26",x
 var PAL={light:{l:"#DE8948",b:"#7A5A52",w:"#5A2D26",x:"#A58E86",k:"#F6EDE6"},dark:{l:"#F9D58D",b:"#CDD7D8",w:"#FBF3EE",x:"#9A7A72",k:"#2B1512"}};
 function pal(){var d=document.documentElement.getAttribute("data-theme")==="dark",p=PAL[d?"dark":"light"];for(var k in p)C[k]=p[k];}
 function col(c){return C[c]||c||C.w;}
-function T(x,y,s,o){o=o||{};var fz=Math.max(o.s||22,o.k==="a-f"&&o.tl?(o.s||22):17);o.s=fz;return '<text x="'+x+'" y="'+y+'" fill="'+col(o.c)+'" text-anchor="'+(o.an||"middle")+'" class="'+(o.k||"a-u")+'" style="font-size:'+(o.s||22)+'px;font-weight:'+(o.w||400)+';'+(o.f?"font-family:Georgia,'Century Schoolbook',serif;":"")+(o.ls?"letter-spacing:"+o.ls+"px;":"")+'--d:'+(o.d||0)+'s">'+s+'</text>';}
+function T(x,y,s,o){o=o||{};var fz=Math.max(o.s||22,o.k==="a-f"&&o.tl?(o.s||22):17);o.s=fz;return '<text x="'+x+'" y="'+y+'" fill="'+col(o.c)+'" text-anchor="'+(o.an||"middle")+'" class="'+(o.k||"a-u")+'" style="font-size:'+(o.s||22)+'px;font-weight:'+(o.w||400)+';'+(o.f?"font-family:'Century Schoolbook',Georgia,serif;":"")+(o.ls?"letter-spacing:"+o.ls+"px;":"")+'--d:'+(o.d||0)+'s">'+s+'</text>';}
 function P(d,o){o=o||{};return '<path d="'+d+'" pathLength="1" fill="none" stroke="'+col(o.c)+'" stroke-width="'+(o.w||3)+'" stroke-linecap="round" stroke-linejoin="round" class="a-d" style="--d:'+(o.d||0)+'s;--t:'+(o.t||1)+'s"/>';}
 function R(x,y,w,h,o){o=o||{};return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(o.r||0)+'" fill="'+(o.f?col(o.f):"none")+'"'+(o.fo?' fill-opacity="'+o.fo+'"':"")+(o.c?' stroke="'+col(o.c)+'" stroke-width="'+(o.w||1.5)+'"':"")+' class="'+(o.k||"a-f")+'" style="--d:'+(o.d||0)+'s;--t:'+(o.t||1)+'s"/>';}
 function O(cx,cy,r,o){o=o||{};return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+(o.f?col(o.f):"none")+'"'+(o.fo?' fill-opacity="'+o.fo+'"':"")+(o.c?' stroke="'+col(o.c)+'" stroke-width="'+(o.w||2)+'"':"")+' class="'+(o.k||"a-f")+'" style="--d:'+(o.d||0)+'s;--t:'+(o.t||1)+'s"/>';}
@@ -1504,7 +1518,7 @@ function wave(x0,x1,y,a,f,ph){var s="";for(var x=x0;x<=x1;x+=4){var yy=y+a*Math.
 function LI(x,y,arr,o){o=o||{};var h="",g=o.gap||40;arr.forEach(function(t,i){var d=(o.d||.3)+i*(o.st||.55),yy=y+i*g;h+=R(x,yy-17,4,26,{f:o.c||"s",d:d,k:"a-g"})+T(x+18,yy+3,t,{an:"start",s:o.s||22,c:o.tc||"w",d:d});});return h;}
 function tick(x,y,d,c){return P("M"+x+" "+y+" l7 8 l15 -17",{c:c||"g",w:3.5,d:d,t:.5});}
 function tag(){return "";}
-function lab(k){return T(30,40,k,{an:"start",s:15,w:700,c:"s",ls:3,k:"a-f",tl:1})+P("M30 52 H84",{c:"s",w:2,t:.6});}
+function lab(k){if(k==="TITLE"||k==="END")return "";return T(30,40,k,{an:"start",s:15,w:700,c:"s",ls:3,k:"a-f",tl:1})+P("M30 52 H84",{c:"s",w:2,t:.6})+T(610,40,"Recharge mode: ON",{an:"end",s:15,c:"x",k:"a-f",tl:1,w:700});}
 function stat(x,y,big,l1,l2,d,c){return T(x,y,big,{s:92,f:1,c:c||"l",d:d||0})+T(x,y+38,l1,{s:23,c:"w",d:(d||0)+.5})+(l2?T(x,y+66,l2,{s:17,c:"b",d:(d||0)+.9}):"");}
 function dial(cx,cy,r){var h=O(cx,cy,r,{c:"x",w:2,fo:0});for(var i=0;i<24;i++){var a=pt(cx,cy,r,i*15),b=pt(cx,cy,r-(i%6?6:12),i*15);h+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+C.x+'" stroke-width="2" class="a-f"/>';}
  return h+T(cx,cy-r-12,"12 am",{s:15,c:"b",k:"a-f"})+T(cx+r+12,cy+5,"6 am",{s:15,c:"b",an:"start",k:"a-f"})+T(cx,cy+r+26,"12 pm",{s:15,c:"b",k:"a-f"})+T(cx-r-12,cy+5,"6 pm",{s:15,c:"b",an:"end",k:"a-f"});}
@@ -1514,7 +1528,7 @@ var V=[
 {t:"Why can’t I fall asleep?",s:"The body clock, sleep pressure and light",sc:[
  {k:"11 PM",cap:"It’s 11 pm. You’re tired, but your brain is wide awake. Is something wrong with you? Probably not.",v:function(){return tag()+T(320,170,"11:00 pm",{s:72,f:1,c:"l"})+T(320,212,"Tired body. Awake brain.",{s:23,c:"b",d:.9})+P(wave(50,590,290,18,8),{c:"s",t:3.2,d:1.1});}},
  {k:"BODY CLOCK",cap:"Everyone has a body clock. When it gets dark, your body releases a hormone called melatonin, which helps you feel sleepy. In teenagers, melatonin is released and peaks later. So wanting to stay up later is natural. It isn’t laziness.",v:function(){var cx=182,cy=190;return tag()+dial(cx,cy,104)+P(arc(cx,cy,84,315,465),{c:"g",w:9,d:.7,t:1.5})+P(arc(cx,cy,64,345,495),{c:"s",w:9,d:1.9,t:1.5})+O(378,150,6,{f:"g",d:.7,k:"a-pop"})+T(396,150,"Younger child",{an:"start",s:22,c:"b",d:.9})+O(378,205,6,{f:"s",d:1.9,k:"a-pop"})+T(396,205,"Teen sleep window",{an:"start",s:22,c:"s",d:2.1})+T(396,235,"shifts later",{an:"start",s:22,c:"s",d:2.4})+T(396,300,"Illustration, not exact times",{an:"start",s:15,c:"x",d:3});}},
- {k:"SLEEP PRESSURE",cap:"There’s a second thing too. Sleep pressure builds with every hour you’re awake, and it peaks in the evening. Early alarms and late body clocks can pull against each other.",v:function(){return tag()+P("M70 300 H580 M70 300 V80",{c:"x",w:2,t:.8})+P("M70 285 C200 262 330 200 560 92",{c:"l",w:5,d:.6,t:2.4})+P("M70 296 L400 296 C470 296 500 270 560 200",{c:"s",w:4,d:1.2,t:2.4})+O(560,92,7,{f:"l",d:3,k:"a-pop"})+T(70,326,"Wake up",{an:"start",s:15,c:"b",k:"a-f"})+T(580,326,"Bedtime",{an:"end",s:15,c:"b",k:"a-f"})+T(90,80,"Sleep pressure",{an:"start",s:22,c:"l",d:2.2})+T(330,250,"Melatonin",{an:"start",s:22,c:"s",d:2.8});}},
+ {k:"SLEEP PRESSURE",cap:"There’s a second thing too. Sleep pressure builds with every hour you’re awake, and it peaks in the evening. Early alarms and late body clocks can pull against each other.",v:function(){return tag()+P("M70 300 H580 M70 300 V80",{c:"x",w:2,t:.8})+P("M70 285 C200 262 330 200 560 92",{c:"l",w:5,d:.6,t:2.4})+P("M70 296 L400 296 C470 296 500 270 560 200",{c:"s",w:4,d:1.2,t:2.4})+O(560,92,7,{f:"l",d:3,k:"a-pop"})+O(560,200,7,{f:"s",d:3.6,k:"a-pop"})+T(70,326,"Wake up",{an:"start",s:15,c:"b",k:"a-f"})+T(580,326,"Bedtime",{an:"end",s:15,c:"b",k:"a-f"})+T(90,80,"Sleep pressure",{an:"start",s:22,c:"l",d:2.2})+T(330,250,"Melatonin",{an:"start",s:22,c:"s",d:2.8});}},
  {k:"LIGHT AT NIGHT",cap:"Bright light late in the evening, like a screen, can disrupt melatonin and make it harder to fall asleep. A review of 20 studies covering about 125,000 children and teenagers linked bedtime device use to less sleep. That is a link, not proof of cause.",v:function(){var h=tag()+R(90,120,92,160,{c:"b",w:3,r:14,fo:0,k:"a-f"})+R(99,138,74,118,{f:"l",fo:.9,r:6,d:.5});for(var i=0;i<3;i++)h+='<circle cx="136" cy="200" r="90" fill="none" stroke="'+C.l+'" stroke-width="2" class="a-wave" style="--d:'+(i*1.1)+'s;--t:3.3s"/>';return h+T(432,160,"20 studies",{s:42,f:1,c:"l",d:.8})+T(432,205,"about 125,000 children and teens",{s:20,c:"w",d:1.4})+T(432,243,"Bedtime device use linked to less sleep",{s:17,c:"b",d:2})+T(432,290,"A link, not proof of cause",{s:19,c:"s",w:700,d:3});}},
  {k:"SCHOOL START",cap:"Early starts matter too. In an NIH-funded study, students whose school started about an hour later slept around 43 minutes more per night.",v:function(){return tag()+T(320,160,"+43 min",{s:96,f:1,c:"l"})+T(320,205,"more sleep per night",{s:26,d:.7})+P("M120 262 H520",{c:"x",w:2,d:1,t:.6})+R(120,252,293,20,{f:"s",r:4,k:"a-gx",d:1.3,t:1.5})+T(120,296,"0",{an:"start",s:15,c:"b",d:1.3,k:"a-f"})+T(520,296,"60 min",{an:"end",s:15,c:"b",d:1.3,k:"a-f"})+T(320,326,"School starting about an hour later",{s:19,c:"b",d:2.4});}},
  {k:"CAFFEINE",cap:"Caffeine late in the day can keep you awake. NHLBI advises avoiding it close to bedtime, and the CDC says to avoid it in the afternoon and evening. A 2024 review of 18 studies, covering about 188,000 teens in 13 countries, linked energy drinks to poorer sleep quality and shorter sleep. Again, that is a link, and tired teens may also reach for caffeine more.",min:14,v:function(){return T(320,150,"188,000",{s:88,f:1,c:"l"})+T(320,194,"teens, 18 studies, 13 countries",{s:23,d:.7})+T(320,240,"Energy drinks linked to poorer, shorter sleep",{s:21,c:"b",d:1.5})+T(320,290,"A link, not proof. It can run both ways.",{s:20,c:"s",w:700,d:3.5});}},
@@ -1598,9 +1612,18 @@ var V=[
 ]}
 ];
 
+/* title and end cards */
+var TT=[["Why can’t I","fall asleep?","The body clock, sleep pressure and light"],["What short sleep","does to you","Focus, mood, sport, driving and your body"],["Insomnia","","When worrying keeps you awake"],["Delayed","sleep phase","A body clock that runs late"],["Sleep apnea","","Breathing that stops at night"],["Restless legs","","The urge you can’t ignore"],["How to ask for","help with sleep","What to track, who to tell, what to say"]];
+function ripples(){var h="";for(var i=0;i<3;i++)h+='<circle cx="320" cy="170" r="90" fill="none" stroke="'+(i===1?C.l:C.s)+'" stroke-width="2" stroke-opacity=".3" class="a-wave" style="--d:'+(i*1.3)+'s;--t:4s"/>';return h;}
+function sparkle(x,y,s,d){return T(x,y,"✦",{s:s,c:"l",d:d,k:"a-f"});}
+V.forEach(function(v,i){var t=TT[i];
+ v.sc.unshift({k:"TITLE",cap:v.t+". "+v.s+".",min:4,v:function(){var two=!!t[1],y1=two?172:196;return ripples()+T(320,112,"VIDEO "+(i+1)+" OF 7",{s:15,w:700,c:"s",ls:4,d:.2})+T(320,y1,t[0],{s:50,f:1,d:.5})+(two?T(320,y1+58,t[1],{s:50,f:1,c:"s",d:.9}):"")+T(320,two?y1+110:y1+56,t[2],{s:22,c:"b",d:1.5})+sparkle(110,90,26,.8)+sparkle(540,250,20,1.4)+sparkle(500,80,16,1.1)+sparkle(130,280,16,1.7);}});
+ v.sc.push({k:"END",cap:"That’s the video. There’s more on the Science page, and the tools are ready to try tonight.",min:6,v:function(){return ripples()+T(320,150,"Recharge",{s:54,f:1,d:.3})+T(320,208,"mode: ON",{s:54,f:1,c:"s",d:.8})+T(320,268,"More on the Science page · Tools to try tonight",{s:21,c:"b",d:1.6})+sparkle(120,100,24,1)+sparkle(530,90,18,1.4)+sparkle(500,290,22,1.8);}});
+});
+
 /* durations */
 function plain(s){return s.replace(/<[^>]+>/g,"");}
-V.forEach(function(v,vi){v.tot=0;v.sc.forEach(function(s){s.dur=Math.max(s.min||6,plain(s.cap).split(/\s+/).length/2.35+1.8);v.tot+=s.dur;});});
+V.forEach(function(v,vi){v.tot=0;v.sc.forEach(function(s){s.dur=Math.max(s.min||6,plain(s.cap).split(/\s+/).length/2.55+1.6);v.tot+=s.dur;});});
 function fmt(sec){var m=Math.floor(sec/60),s=Math.round(sec%60);if(s===60){m++;s=0;}return m+":"+(s<10?"0":"")+s;}
 
 /* cards */
@@ -1614,7 +1637,7 @@ function buildCards(){var g=document.getElementById("vdGrid");if(!g||g.getAttrib
 var ov,root,stage,capEl,segEl,ppBtn,vcBtn,titleEl,numEl,endEl,endT,endNext;
 var vi=0,si=0,playing=false,timer=null,remain=0,startAt=0,voice=false,last=null;
 function build(){ov=document.createElement("div");ov.className="vd-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-modal","true");ov.setAttribute("aria-label","Video player");
- ov.innerHTML='<div class="vd"><div class="vd-top"><div class="tt"><span class="nn"></span><span class="ti"></span></div><button type="button" class="vd-x" aria-label="Close video">×</button></div><div class="vd-stage" aria-hidden="true"><div class="sc" style="width:100%;height:100%"></div><div class="vd-end"><b></b><div><button type="button" class="go rp">Watch again</button><button type="button" class="nx">Next video</button></div></div></div><div class="vd-cap" aria-live="polite"></div><div class="vd-seg"></div><div class="vd-ctl"><button type="button" class="pv" aria-label="Previous scene">◀</button><button type="button" class="pp">Pause</button><button type="button" class="nxs" aria-label="Next scene">▶</button><span class="sp"></span><button type="button" class="vc" aria-pressed="false">Voice: off</button></div></div>';
+ ov.innerHTML='<div class="vd"><div class="vd-top"><div class="tt"><span class="nn"></span><span class="ti"></span></div><button type="button" class="vd-x" aria-label="Close video">×</button></div><div class="vd-stage" aria-hidden="true"><i class="vd-bgb b1"></i><i class="vd-bgb b2"></i><div class="sc" style="width:100%;height:100%"></div><div class="vd-end"><b></b><div><button type="button" class="go rp">Watch again</button><button type="button" class="nx">Next video</button></div></div></div><div class="vd-cap" aria-live="polite"></div><div class="vd-seg"></div><div class="vd-ctl"><button type="button" class="pv" aria-label="Previous scene">◀</button><button type="button" class="pp">Pause</button><button type="button" class="nxs" aria-label="Next scene">▶</button><span class="sp"></span><button type="button" class="vc" aria-pressed="false">Voice: off</button></div></div>';
  document.body.appendChild(ov);root=ov.querySelector(".vd");stage=ov.querySelector(".sc");capEl=ov.querySelector(".vd-cap");segEl=ov.querySelector(".vd-seg");ppBtn=ov.querySelector(".pp");vcBtn=ov.querySelector(".vc");titleEl=ov.querySelector(".ti");numEl=ov.querySelector(".nn");endEl=ov.querySelector(".vd-end");endT=endEl.querySelector("b");endNext=endEl.querySelector(".nx");
  ov.querySelector(".vd-x").addEventListener("click",close);
  ov.addEventListener("click",function(e){if(e.target===ov)close();});
