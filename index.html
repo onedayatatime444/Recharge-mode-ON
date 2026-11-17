@@ -522,6 +522,26 @@ button.ghost:hover{background:var(--lemon); color:var(--ink); border-color:var(-
 @keyframes vddrift2{from{transform:translate(0,0)}to{transform:translate(-30%,-18%)}}
 .vd.paused .vd-bgb{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.vd-bgb{animation:none}.vd-stage .sc svg{animation:none}}
+.law-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:14px}
+.law-card{border:1.5px solid var(--fg); border-radius:22px; padding:20px 20px 16px; background:var(--soft,rgba(255,255,255,.45))}
+.law-card .tag{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:6px}
+.law-card h3{margin:0 0 10px; font-size:22px}
+.law-card dl{margin:0}
+.law-card dt{font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin-top:10px}
+.law-card dd{margin:2px 0 0; font-size:16px; line-height:1.5}
+[data-theme="dark"] .law-card{background:rgba(0,0,0,.3)}
+.menu-btn{display:none}
+@media (max-width:759px){
+  .menu-btn{display:inline-block; order:2}
+  .head-tools{margin-left:auto}
+  .mainnav{display:none; flex-direction:column; gap:6px; padding:10px 0 6px}
+  .mainnav.open{display:flex}
+  .mainnav a{flex:none; text-align:left; padding:12px 16px; font-size:17px}
+}
+@media (min-width:760px){
+  .mainnav{gap:8px}
+  .mainnav a{padding:9px 16px}
+}
 
 /* ---- single-file page switching ---- */
 .spage{display:none}
@@ -611,7 +631,8 @@ details[open] .more{animation:rise .35s ease-out}
 <header class="site-head">
   <div class="bar">
     <a class="brand" href="#home">Recharge <em>mode: ON</em></a>
-    <nav class="mainnav" aria-label="Main"><a href="#home" data-nav="home">Home</a><a href="#tools" data-nav="tools">Tools</a><a href="#research" data-nav="research">Research</a><a href="#science" data-nav="science">Science</a><a href="#about" data-nav="about">About</a></nav>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mainnav">Menu</button>
+    <nav class="mainnav" id="mainnav" aria-label="Main"><a href="#home" data-nav="home">Home</a><a href="#tools" data-nav="tools">Tools</a><a href="#research" data-nav="research">Research</a><a href="#science" data-nav="science">Science</a><a href="#law" data-nav="law">Law</a><a href="#about" data-nav="about">About</a></nav>
     <div class="head-tools">
       <button class="icon-btn" id="themeBtn" type="button" aria-pressed="false">Dark</button>
       <button class="icon-btn" id="shareBtn" type="button">Share</button>
@@ -1023,6 +1044,116 @@ details[open] .more{animation:rise .35s ease-out}
     </ul>
     <p>Start with a parent or carer, your school nurse, or your doctor.</p>
     <p style="margin-top:26px"><a class="btn" href="#bedtime">Try the tools</a></p>
+  </div>
+</div>
+
+</section>
+<section class="spage" data-page="law">
+<div class="container">
+  <div class="pagehead">
+    <span class="eyebrow">Policy</span>
+    <h1>Sleep and <em>the law</em></h1>
+    <p>Can a law fix teen sleep? California became the first US state to require later school start times. Here is what the law says, what happened next, and whether England should do the same.</p>
+  </div>
+
+  <div class="note-box"><b>Please read:</b> this page explains public laws and research for learning. It is not legal advice, and I&rsquo;m a student, not a lawyer. Laws can change, so check the sources for the latest.</div>
+
+  <div class="prose">
+    <h2>The <em>question</em></h2>
+    <p>The science on this site says many teens&rsquo; body clocks run late, and that early school starts can cut sleep short. That raises a policy question: who should decide when school starts? Each school, each family, or the state? Some places have answered with a law, and others have not.</p>
+    <h2>Three places, <em>three answers</em></h2>
+  </div>
+  <div class="law-grid">
+    <article class="law-card">
+      <span class="tag">California &middot; USA</span>
+      <h3>A state law</h3>
+      <dl>
+        <dt>The rule</dt><dd>Middle schools start no earlier than 8:00am and high schools no earlier than 8:30am (Senate Bill 328).</dd>
+        <dt>Who decides</dt><dd>The state sets the earliest start. Rural districts are exempt.</dd>
+        <dt>Status</dt><dd>Required from July 2022, or later where a school&rsquo;s union contract ran on.</dd>
+      </dl>
+    </article>
+    <article class="law-card">
+      <span class="tag">Florida &middot; USA</span>
+      <h3>A law that was softened</h3>
+      <dl>
+        <dt>The rule</dt><dd>A 2023 law set the same 8:00 and 8:30 start times from 2026.</dd>
+        <dt>Who decides</dt><dd>The state, but a 2025 law lets districts count as compliant by sending the state a report.</dd>
+        <dt>Status</dt><dd>Changed in 2025, before the original deadline.</dd>
+      </dl>
+    </article>
+    <article class="law-card">
+      <span class="tag">England</span>
+      <h3>No law on start times</h3>
+      <dl>
+        <dt>The rule</dt><dd>None. There is no legal limit on how early school can start.</dd>
+        <dt>Who decides</dt><dd>School governing bodies, or the trust in the case of academies.</dd>
+        <dt>Status</dt><dd>In 2022 the government said it had no plans to change this.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="prose" style="margin-top:34px">
+    <h2>The <em>details</em></h2>
+    <p>Tap a card to read more. Each one lists its sources.</p>
+  </div>
+  <div class="sci-grid">
+    <details class="sci-card c1"><summary><h3>What California&rsquo;s law says</h3><p>Senate Bill 328 sets the earliest start time for most middle and high schools.</p><span class="hint"></span></summary><div class="more"><p><b>What it requires.</b> Senate Bill 328 was signed in 2019 by Governor Gavin Newsom. It says the school day for middle schools and high schools, including charter schools, must begin no earlier than 8:00am for middle schools and 8:30am for high schools.</p><p><b>When.</b> The rule applies from July 1, 2022, or from the date a school district&rsquo;s or charter school&rsquo;s union (collective bargaining) agreement in force on January 1, 2020 ends, whichever is later. That meant some schools had to change later than others.</p><p><b>Who it leaves out.</b> Rural school districts are exempt, and CalMatters reported that the law does not define &ldquo;rural&rdquo;. It also reported that schools that serve primary grades as well, such as K-8 schools, are not affected, and that early-morning &ldquo;zero periods&rdquo; are not covered.</p><p><b>What it doesn&rsquo;t do.</b> It does not set a bell schedule or change the number of teaching minutes schools must provide, so some lost time may have to be made up elsewhere in the day. CalMatters also reported that no funding came with the law.</p><p><b>Keep in mind.</b> I read the official bill summary and a news explainer from the time it passed, not the full text of the statute. Details may have changed since.</p><p class="srcl">Sources: <a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201920200SB328" target="_blank" rel="noopener">California Legislature, SB 328</a> &middot; <a href="https://calmatters.org/education/k-12-education/2019/10/how-school-start-time-law-will-work-in-california/" target="_blank" rel="noopener">CalMatters explainer</a></p></div></details>
+
+    <details class="sci-card c2"><summary><h3>Why it was controversial</h3><p>Health arguments met worries about local control, cost and logistics.</p><span class="hint"></span></summary><div class="more"><p><b>Who gets to decide.</b> CalMatters described a charged debate between school boards, administrators and parents over who decides when a community&rsquo;s school day starts. An earlier version of the bill was vetoed by then-Governor Jerry Brown, who wrote that the state was overreaching. Other legislators said the issue matters so much for teens&rsquo; wellbeing that a state rule should come before local control.</p><p><b>Cost.</b> A Senate Appropriations Committee analysis estimated the law could cost schools &ldquo;potentially in the millions of dollars&rdquo;. The California School Boards Association opposed the bill. Supporters hoped better attendance would bring in more attendance-based funding.</p><p><b>Logistics.</b> Later starts can mean changes to bus timetables, after-school sport and parents&rsquo; work schedules. A study of the law, described in the next card, found parents arrived at work later and sports shifted later.</p><p><b>Vague wording.</b> Leaving &ldquo;rural&rdquo; undefined meant it was unclear how many schools were exempt.</p><p><b>Keep in mind.</b> This is the debate as reported in 2019, when the law passed. I have not tracked how every district responded since.</p><p class="srcl">Sources: <a href="https://calmatters.org/education/k-12-education/2019/10/how-school-start-time-law-will-work-in-california/" target="_blank" rel="noopener">CalMatters explainer</a></p></div></details>
+
+    <details class="sci-card c3"><summary><h3>What happened after the law</h3><p>A 2026 study found more students getting 8 hours, with some trade-offs.</p><span class="hint"></span></summary><div class="more"><p><b>The study.</b> A 2026 working paper from the National Bureau of Economic Research (Dou, Gihleb, Giuntella and Lonsky) used four data sources to compare California before and after the law. It found the law raised the share of students sleeping at least 8 hours by 13%.</p><p><b>Other findings.</b> Effects on mental health pointed toward improvement but were imprecise. In high schools in counties with earlier start times before the law, the share of students meeting state standards in maths, English and science rose by 1.7 to 1.8 percentage points, with the largest gains among Hispanic students. There was also suggestive evidence that adolescents&rsquo; sports participation fell and moved later, and that parents arrived at work later and were more likely to be at work after 4pm.</p><p><b>The starting point.</b> The state did not track start times, but before the law a CalMatters survey of 408 high schools in large districts found only 21 started at 8:30am or later.</p><p><b>Keep in mind.</b> This is a working paper, which means it has not yet been through peer review. I read the abstract, not the full paper, so I have not put in exact before-and-after sleep figures. A 13% rise in the share of students getting 8 hours is a relative change, not a 13 percentage point jump.</p><p class="srcl">Sources: <a href="https://ideas.repec.org/p/nbr/nberwo/35184.html" target="_blank" rel="noopener">NBER working paper 35184</a> &middot; <a href="https://calmatters.org/education/k-12-education/2019/10/how-school-start-time-law-will-work-in-california/" target="_blank" rel="noopener">CalMatters explainer</a></p></div></details>
+
+    <details class="sci-card c4"><summary><h3>Florida: a law that was softened</h3><p>A mandate passed in 2023, then changed in 2025 before it began.</p><span class="hint"></span></summary><div class="more"><p><b>The 2023 law.</b> Florida&rsquo;s House Bill 733 became law in May 2023 (Chapter 2023-78). According to News Service of Florida, it said high schools could not start before 8:30am and middle schools could not start before 8:00am, with a 2026 deadline for districts to comply.</p><p><b>Why districts pushed back.</b> The same report said many districts struggled to comply because they would need more buses and hard-to-find bus drivers, and because later starts could affect after-school activities and families&rsquo; child care. A Senate analysis it quoted said the average Florida high school started at 7:45am, and 46% of high schools started before 7:30am.</p><p><b>The 2025 change.</b> In 2025 Florida passed Senate Bill 296 (Chapter 2025-53). Its official summary says district school boards and charter schools count as in compliance once they send a specified report to the Department of Education. The Senate passed it 38 to 0 and the House 116 to 0, and the Governor approved it on 21 May 2025.</p><p><b>Why it matters.</b> It shows that a start-time rule can be hard to carry out in practice, and that a law can be softened before it takes effect.</p><p><b>Keep in mind.</b> I read the official bill pages and a news report, not the full text of the laws, so I have not described what the report must contain.</p><p class="srcl">Sources: <a href="https://www.flsenate.gov/Session/Bill/2023/733" target="_blank" rel="noopener">Florida Senate, HB 733 (2023)</a> &middot; <a href="https://www.flsenate.gov/Session/Bill/2025/296" target="_blank" rel="noopener">Florida Senate, SB 296 (2025)</a> &middot; <a href="https://clickorlando.com/news/2025/03/27/florida-senate-backs-off-later-school-start-times" target="_blank" rel="noopener">News Service of Florida report</a></p></div></details>
+
+    <details class="sci-card c5"><summary><h3>The rules in England</h3><p>Schools decide their own start times, and the government has no plans to change that.</p><span class="hint"></span></summary><div class="more"><p><b>Who decides.</b> In a 2022 response to a petition, the Department for Education said governing bodies of all maintained schools in England decide when sessions begin and end, and that for academies and free schools the school day is the responsibility of the academy trust. It said the government had no plans to remove this flexibility.</p><p><b>The petition.</b> The petition asked for school to start at 10am to help teenagers with tiredness. It got 16,588 signatures, well short of the 100,000 needed for Parliament to consider a debate, and closed in October 2022.</p><p><b>The minimum week.</b> The government also set out a non-legislative expectation that mainstream state-funded schools should run a 32.5-hour week from September 2023. The department said a school starting at 10am would therefore have to stay open until at least 4:30pm.</p><p><b>Keep in mind.</b> This is the position in England in 2022. Education is devolved, so Scotland, Wales and Northern Ireland have their own systems, which I did not look at. The rules may have changed since.</p><p class="srcl">Sources: <a href="https://petition.parliament.uk/petitions/612113" target="_blank" rel="noopener">UK Parliament petition 612113 and the government response</a></p></div></details>
+
+    <details class="sci-card c6"><summary><h3>How England could change it</h3><p>The options run from guidance to a pilot to a law.</p><span class="hint"></span></summary><div class="more"><p><b>Where the power sits now.</b> Governing bodies of maintained schools and academy trusts decide the school day (see the card above). So a national rule would mean changing that, either by new legislation passed by Parliament or by a new Department for Education expectation.</p><p><b>A precedent for guidance.</b> The government&rsquo;s 32.5-hour minimum school week is described as a &ldquo;non-legislative&rdquo; expectation, so the department has already used this softer route on the length of the school week.</p><p><b>The options.</b> These are my own summary of the choices, not a government list: do nothing and leave it to schools; publish guidance and evidence; fund a pilot in some schools and measure the results; or set a legal minimum start time as California did.</p><p><b>The catch.</b> Because of the 32.5-hour expectation, a later start would mean a later finish unless the school day was shortened, as in the 10am petition example above.</p><p><b>Keep in mind.</b> I am not a lawyer and have not checked which specific legal duties a change would touch, so I have not named them.</p><p class="srcl">Sources: <a href="https://petition.parliament.uk/petitions/612113" target="_blank" rel="noopener">UK Parliament petition 612113 and the government response</a></p></div></details>
+
+    <details class="sci-card c6"><summary><h3>What the research says about England</h3><p>A UK model, a German trial and a US study point in different directions.</p><span class="hint"></span></summary><div class="more"><p><b>A UK prediction.</b> In 2017, researchers at the University of Surrey and Harvard Medical School built a mathematical model of the body clock. The study, published in Scientific Reports, predicted that delaying school start times in the UK would not reduce sleep deprivation, because teens&rsquo; body clocks would drift even later in response and, within weeks, they would find it just as hard to get up. The authors suggested bright light in the day and dim light in the evening as an alternative. The model did lend some support to delaying start times in the US, where some schools start as early as 7am.</p><p><b>A German school.</b> A 2022 study of 33 students at a German school let older students start at 8:50 instead of 8:00 on days they chose. On those days students reported sleeping longer and better, but they used the option only about one day a week on average, and overall weekly sleep did not improve. A separate paper from the same study found no improvement in grades. It was one school of an academic type, so it may not apply elsewhere. The digest also notes that UK schools often start at 9am or earlier.</p><p><b>A US study.</b> The NIH-funded study in the &ldquo;Early school starts&rdquo; card on the Science page found students at schools that started about an hour later slept around 43 minutes more per night by 11th grade.</p><p><b>Keep in mind.</b> The UK finding is a model&rsquo;s prediction, not a trial in real schools. I did not find a trial of later start times in English secondary schools, so the UK evidence is thin.</p><p class="srcl">Sources: <a href="https://www.news-medical.net/news/20170328/Delaying-school-start-times-unlikely-to-reduce-sleep-deprivation-in-teenagers-research-finds.aspx" target="_blank" rel="noopener">University of Surrey news on the 2017 model</a> &middot; <a href="https://www.bps.org.uk/research-digest/when-school-day-starts-later-teens-get-better-sleep-and-feel-more-motivated" target="_blank" rel="noopener">British Psychological Society digest of the German study</a> &middot; <a href="#science">Science page</a></p></div></details>
+  </div>
+
+  <div class="prose" style="margin-top:34px">
+    <h2>A short <em>timeline</em></h2>
+    <ul>
+      <li><b>2017.</b> A UK and Harvard modelling study predicts that later starts alone would not cut teen sleep deprivation in the UK.</li>
+      <li><b>2019.</b> California signs SB 328, the first statewide mandate on school start times. An earlier version had been vetoed by Governor Jerry Brown.</li>
+      <li><b>2022.</b> The UK petition for a 10am start closes with 16,588 signatures, and the government says it has no plans to change schools&rsquo; freedom to set the day. California&rsquo;s deadline arrives, later where union contracts ran on.</li>
+      <li><b>2023.</b> Florida approves a similar law in May, with a 2026 deadline.</li>
+      <li><b>2025.</b> Florida approves SB 296 in May, letting districts count as compliant by sending a report.</li>
+      <li><b>2026.</b> An NBER working paper reports the effects of California&rsquo;s law.</li>
+    </ul>
+    <h2>Gaps in the <em>evidence</em></h2>
+    <p>As of November 2026, I found no trial of later start times in English secondary schools, so the UK evidence rests on a computer model and a study of one German school. The California findings come from a working paper that has not been peer reviewed, and I read only its abstract. I could not find out how Florida&rsquo;s schools have changed since 2025, or whether England&rsquo;s position has moved since 2022. This page covers England only, not the rest of the UK.</p>
+
+  </div>
+
+  <div class="prose" style="margin-top:34px">
+    <h2>Should England pass a <em>law like this?</em></h2>
+    <h3>The case for</h3>
+    <ul>
+      <li>Sleep is a public health issue, and a rule applies to every school, not only the ones where parents push for change.</li>
+      <li>It takes pressure off individual schools, which can point to the law when families object.</li>
+      <li>California&rsquo;s results suggest more students reaching 8 hours of sleep.</li>
+    </ul>
+    <h3>The case against</h3>
+    <ul>
+      <li>UK schools often start at 9am or earlier, according to a 2022 British Psychological Society digest, while Florida&rsquo;s average high school started at 7:45am. So the strongest evidence comes from much earlier starts than England&rsquo;s, and the benefit here is uncertain.</li>
+      <li>The UK model suggests teens&rsquo; bodies adapt unless evening light and bedtimes change too, and a law on start times cannot control bedtimes.</li>
+      <li>Costs and side effects are real: transport, after-school sport and parents&rsquo; work hours.</li>
+      <li>Florida shows a strict mandate can be hard to deliver.</li>
+    </ul>
+    <h3>Questions a lawyer would ask</h3>
+    <ul>
+      <li><b>Is a law the right tool?</b> Or would guidance, funding or a pilot work better?</li>
+      <li><b>Who should decide?</b> The state, or the people who know each school?</li>
+      <li><b>Is it proportionate?</b> Does the evidence justify one fixed time for every school?</li>
+      <li><b>Is it clear?</b> California left &ldquo;rural&rdquo; undefined and gave no funding, which caused uncertainty.</li>
+      <li><b>How will it be checked?</b> California&rsquo;s law can be evaluated because it applies to the whole state.</li>
+    </ul>
+    <h3>My view</h3>
+    <p>I would be cautious. The strongest evidence comes from the US, where start times are often earlier than in England, so I would not copy California&rsquo;s law word for word. A better first step would be a pilot in some English schools with proper measurement of sleep, because the British evidence is thin. Whatever is decided, a start time on its own will not fix sleep if bedtimes and screens stay the same, which is why this project focuses on habits too.</p>
+    <p style="margin-top:26px"><a class="btn" href="#science">Back to the science</a> &nbsp; <a class="btn" href="#bedtime">Try the tools</a></p>
   </div>
 </div>
 
@@ -1691,6 +1822,7 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
     tools: "Sleep tools | Recharge mode: ON",
     research: "Research: what 62 students told us | Recharge mode: ON",
     science: "Sleep science: why you cannot sleep | Recharge mode: ON",
+    law: "Sleep and the law | Recharge mode: ON",
     about: "About the project | Recharge mode: ON"
   };
   var current = null;
@@ -1715,6 +1847,16 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
   }
   window.addEventListener("hashchange", route);
   route();
+  var mb = document.getElementById("menuBtn"), mn = document.getElementById("mainnav");
+  function closeMenu(){ mn.classList.remove("open"); mb.setAttribute("aria-expanded","false"); mb.textContent = "Menu"; }
+  mb.addEventListener("click", function(){
+    var o = mn.classList.toggle("open");
+    mb.setAttribute("aria-expanded", o ? "true" : "false");
+    mb.textContent = o ? "Close" : "Menu";
+  });
+  window.addEventListener("hashchange", closeMenu);
+  mn.addEventListener("click", function(e){ if (e.target.closest("a")) closeMenu(); });
+  window.addEventListener("resize", function(){ if (window.innerWidth >= 760) closeMenu(); });
 })();
 
 </script>
